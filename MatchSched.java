@@ -2,12 +2,12 @@ import java.util.*;
 import java.util.stream.*;
 public class MatchSched {
     public static void main(String[] args) throws Exception{
-        List<Team> teams=new ArrayList<>();
+        ArrayList<Team> teams=new ArrayList<>();
         teams.add(new Team("India"));
         teams.add(new Team("Australia"));
         teams.add(new Team("England"));
         teams.add(new Team("Pakistan"));
-        teams.add(new Team("NZ"));
+        teams.add(new Team("Srilanka"));
 
         List<Match> matches=Scheduler.createSchedule(teams);
         System.out.println(matches);
@@ -53,6 +53,7 @@ class Match{
         return matchDescription;
     }
 }
+
 class Scheduler{
     public static List<Match> createSchedule(List<Team> teams){
         List<Match> matches=new ArrayList<>();
@@ -65,6 +66,7 @@ class Scheduler{
         return matches;
     }
 }
+
 class Simulator{
     public static void playMatches(List<Match> matches){
         for(Match match:matches){
@@ -81,11 +83,11 @@ class Simulator{
     }
         static void showPointsTable(List<Team> teams,List<Match> matches){
             for(Team team:teams){
-                int wonGames=matches.stream().filter(m->m.getWinner().equals(team)).collect(Collectors.toList()).size();
-                int lostGames=matches.stream().filter(m->m.getLoser().equals(team)).collect(Collectors.toList()).size();
+                int won=matches.stream().filter(ele->ele.getWinner().equals(team)).collect(Collectors.toList()).size();
+                int lost=matches.stream().filter(ele->ele.getLoser().equals(team)).collect(Collectors.toList()).size();
                 System.out.println(team);
-                System.out.println(wonGames);
-                System.out.println(lostGames);
+                System.out.println(won);
+                System.out.println(lost);
             }
         }
 }
@@ -96,7 +98,6 @@ class Team{
     }
     @Override
     public String toString(){
-        //TODO Auto-generated method stub
         return name;
     }
 
